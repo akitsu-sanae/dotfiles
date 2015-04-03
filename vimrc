@@ -1,5 +1,3 @@
-colorscheme desert
-
 syntax on
 set smartindent
 
@@ -31,12 +29,22 @@ set noswapfile
 inoremap jj <Esc>
 inoremap aa ->
 
+inoremap <LEFT> <Nop>
+inoremap <Up> <Nop>
+inoremap <Down> <Nop>
+inoremap <Right> <Nop>
+
+nnoremap <LEFT> gT
+nnoremap <Up> <Nop>
+nnoremap <Down> <Nop>
+nnoremap <Right> gt
+
 inoremap <C-h> <LEFT>
 inoremap <C-j> <UP>
 inoremap <C-k> <DOWN>
 inoremap <C-l> <RIGHT>
 
-inoremap <silent> <C-l> <Esc>$<Insert><Right>;
+inoremap <silent> <C-p> <Esc>$<Insert><Right>;
 
 nnoremap n nzz
 nnoremap N Nzz
