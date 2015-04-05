@@ -40,8 +40,8 @@ nnoremap <Down> <Nop>
 nnoremap <Right> gt
 
 inoremap <C-h> <LEFT>
-inoremap <C-j> <UP>
-inoremap <C-k> <DOWN>
+inoremap <C-j> <DOWN>
+inoremap <C-k> <UP>
 inoremap <C-l> <RIGHT>
 
 inoremap <silent> <C-p> <Esc>$<Insert><Right>;
