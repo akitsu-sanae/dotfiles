@@ -1,51 +1,72 @@
 syntax on
-set smartindent
 
+set number
+set title
+let &titleold=getcwd()
+
+" set tab config
+set tabstop=4
+set softtabstop=4
+set shiftwidth=4
+set expandtab
+set smarttab
+
+" set indent config
+set cindent
+set cinoptions+=:0,g0,N-s
+
+" set search config
 set ignorecase
 set smartcase
 set wrapscan
-
-set autoindent
-set expandtab
-
-set list
-set number
 set incsearch
-set cursorline
-
-set showmatch
 set hlsearch
 
-set smarttab
-set tabstop=4
-set shiftwidth=4
-set softtabstop=4
+set showmatch
+set scrolloff=8
+set showmode
+set background=dark
+set cursorline
+autocmd ColorScheme * highlight CursorLine ctermbg=Black
 
+" set C++ template Angle Bracket
 set matchpairs& matchpairs+=<:>
+
+" no any temp files
 set nowritebackup
 set nobackup
 set noswapfile
 
+" stop beep
+set visualbell t_vb=
+set noerrorbells
+
+" insert mode key mappings
 inoremap jj <Esc>
-inoremap aa ->
 
 inoremap <LEFT> <Nop>
 inoremap <Up> <Nop>
 inoremap <Down> <Nop>
 inoremap <Right> <Nop>
 
+" normal mode key mappings
 nnoremap <LEFT> gT
 nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Right> gt
 
-inoremap <C-h> <LEFT>
-inoremap <C-j> <DOWN>
-inoremap <C-k> <UP>
-inoremap <C-l> <RIGHT>
+" split config
+nnoremap sh <C-w>h
+nnoremap sj <C-w>j
+nnoremap sk <C-w>k
+nnoremap sl <C-w>l
+nnoremap sH <C-w>H
+nnoremap sJ <C-w>J
+nnoremap sK <C-w>K
+nnoremap sL <C-w>L
+nnoremap s= <C-w>=
 
-inoremap <silent> <C-p> <Esc>$<Insert><Right>;
-
+" move searched word to center
 nnoremap n nzz
 nnoremap N Nzz
 nnoremap * *zz
@@ -58,23 +79,13 @@ set runtimepath+=~/.vim/bundle/neobundle.vim/
 call neobundle#begin(expand('~/.vim/bundle/'))
 NeoBundleFetch 'Shougo/neobundle.vim'
 
-NeoBundle 'Shougo/vimproc',{
-        \ 'build' : {
-        \   'windows' : 'make -f make_mingw32.mak',
-        \   'cygwin'  : 'make -f make_cygwin.mak',
-        \   'mac'     : 'make -f make_mac.mak',
-        \   'unix'     : 'make -f make_unix.mak',
-        \ },
-        \}
 
 NeoBundle 'Shougo/neocomplcache'
 NeoBundle 'Shougo/neocomplcache-clang_complete'
-NeoBundle 'Rip-Rip/clang_complete'
 
 let g:neocomplcache_enable_at_startup = 1
 let g:neocomplcache_enable_smart_case = 1
 let g:neocomplcache_force_overwrite_completefunc = 1
-let g:clang_complete_auto = 1
 let g:neocomplcache_min_syntax_length = 3
 let g:neocomplcache_lock_buffer_name_pattern = '\*ku\*'
 
@@ -84,12 +95,6 @@ endfunction
 
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
-let g:clang_use_library=1
-let g:clang_library_path='/usr/lib/llvm-3.5/lib'
-
-let g:clang_complete_copen=1
-let g:clang_use_library=1
-let g:clang_user_options='-std=c++11 -stdlib=libc++'
 
 NeoBundle 'Yggdroot/indentLine'
 let g:indentLine_faster = 1
@@ -97,8 +102,21 @@ let g:indentLine_faster = 1
 NeoBundle 'Townk/vim-autoclose'
 NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-surround'
-NeoBundle 'Shougo/unite.vim'
+NeoBundle 'scrooloose/nerdtree'
+command Dir :NERDTree
 
+NeoBundle 'tomtom/tcomment_vim'
+
+" unite.vim config
+NeoBundle 'Shougo/unite.vim'
+let g:unite_enable_start_insert=1
+" open menu
+nnoremap buf :Unite buffer<CR><Esc>
+nnoremap file :Unite -buffer-name=file file<CR><Esc>
+nnoremap rec :Unite file_mru<CR><Esc>
+" open file
+au FileType unite nnoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
+au FileType unite nnoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
 NeoBundleLazy 'tpope/vim-endwise',{
         \ 'autoload' : { 'insert' : 1,}}
 
