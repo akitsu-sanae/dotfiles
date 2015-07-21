@@ -55,6 +55,10 @@ nnoremap <Up> <Nop>
 nnoremap <Down> <Nop>
 nnoremap <Right> gt
 
+nnoremap Q <Nop>
+nnoremap ZZ <Nop>
+nnoremap ZQ <Nop>
+
 " split config
 nnoremap sh <C-w>h
 nnoremap sj <C-w>j
@@ -73,6 +77,10 @@ nnoremap * *zz
 nnoremap # #zz
 nnoremap g* g*zz
 nnoremap g# g#zz
+
+" folding
+vnoremap fold zf
+vnoremap unfold zd
 
 set runtimepath+=~/.vim/bundle/neobundle.vim/
 
@@ -109,14 +117,30 @@ NeoBundle 'tomtom/tcomment_vim'
 
 " unite.vim config
 NeoBundle 'Shougo/unite.vim'
+NeoBundle 'Shougo/neomru.vim'
+" unite prefix
+nnoremap [unite] <Nop>
+nmap <Space>u [unite]
 let g:unite_enable_start_insert=1
+let g:unite_source_file_mru_limit=50
+let g:unite_source_file_mru_filename_format=''
 " open menu
-nnoremap buf :Unite buffer<CR><Esc>
-nnoremap file :Unite -buffer-name=file file<CR><Esc>
-nnoremap rec :Unite file_mru<CR><Esc>
-" open file
-au FileType unite nnoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
-au FileType unite nnoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
+nnoremap <silent> [unite]cd :<C-u>Unite<Space>file<CR>
+nnoremap <silent> [unite]b  :<C-u>Unite<Space>buffer<CR>
+nnoremap <silent> [unite]r  :<C-u>Unite<Space>file_mru<CR>
+nnoremap <silent> [unite]f  :<C-u>Unite<Space>bookmark<CR>
+nnoremap <silent> [unite]a  :<C-u>UniteBookmarkAdd<CR>
+autocmd FileType unite call s:unite_setting()
+function! s:unite_setting()"{{{
+    nmap <buffer><Esc> <Plug>(unite_exit)
+    nnoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
+    nnoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
+    nnoremap <silent> <buffer> <expr> <Space><Space><Space> unite#do_action('open')
+    inoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
+    inoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
+    inoremap <silent> <buffer> <expr> <Space><Space><Space> unite#do_action('open')
+endfunction"}}}
+
 NeoBundleLazy 'tpope/vim-endwise',{
         \ 'autoload' : { 'insert' : 1,}}
 
