@@ -70,6 +70,20 @@ nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap s= <C-w>=
 
+" tab
+nnoremap t <Nop>
+nnoremap tt :<C-u>tabnew<CR>
+nnoremap <expr> tf ":<C-u>tabnew ".GetRelativePath()
+
+function! GetRelativePath()
+    let path = expand("%:~:.:h")
+    if path == "."
+        return ""
+    else
+        return path."/"
+    endif
+endfunction
+
 " move searched word to center
 nnoremap n nzz
 nnoremap N Nzz
