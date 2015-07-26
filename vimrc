@@ -27,7 +27,7 @@ set scrolloff=8
 set showmode
 set background=dark
 set cursorline
-autocmd ColorScheme * highlight CursorLine ctermbg=Black
+autocmd ColorScheme * highlight CursorLine ctermbg=234
 
 " set C++ template Angle Bracket
 set matchpairs& matchpairs+=<:>
@@ -162,6 +162,7 @@ NeoBundleLazy 'tpope/vim-endwise',{
 NeoBundle 'vim-scripts/rdark'
 NeoBundle 'w0ng/vim-hybrid'
 NeoBundle 'sjl/badwolf'
+NeoBundle 'tomasr/molokai'
 
 call neobundle#end()
 
@@ -169,7 +170,10 @@ filetype plugin indent on
 
 NeoBundleCheck
 
-colorscheme badwolf
+syntax on
+set t_Co=256
+colorscheme molokai
+highlight Normal ctermbg=none
 
 if has("autocmd")
         autocmd BufReadPost *
