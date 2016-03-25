@@ -158,6 +158,53 @@ endfunction"}}}
 NeoBundleLazy 'tpope/vim-endwise',{
         \ 'autoload' : { 'insert' : 1,}}
 
+
+" status line
+set laststatus=2
+NeoBundle 'itchyny/lightline.vim'
+
+let g:lightline = {
+    \ 'colorscheme' : 'wombat',
+    \ 'active' : {
+    \    'left' : [ ['mode', 'paste'],
+    \        ['fugitive', 'readonly', 'filename', 'modified']
+    \    ]
+    \ },
+    \ 'component_function' : {
+    \    'fugitive' : 'LightLineFugtive',
+    \    'readonly' : 'LightLineReadonly',
+    \    'modified' : 'LightLineModified'
+    \ },
+    \ 'separator' : { 'left' : '', 'right' : '' },
+    \ 'subseparator' : { 'left' : '|', 'right' : '|' }
+    \ }
+
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "✖"
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugtive()
+    return exists('*fugitive#head')? fugitive#head() : ''
+endfunction
+
 " colorschemes
 NeoBundle 'vim-scripts/rdark'
 NeoBundle 'w0ng/vim-hybrid'
