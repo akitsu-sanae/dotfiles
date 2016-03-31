@@ -70,19 +70,10 @@ nnoremap sK <C-w>K
 nnoremap sL <C-w>L
 nnoremap s= <C-w>=
 
-" tab
-nnoremap t <Nop>
-nnoremap tt :<C-u>tabnew<CR>
-nnoremap <expr> tf ":<C-u>tabnew ".GetRelativePath()
-
-function! GetRelativePath()
-    let path = expand("%:~:.:h")
-    if path == "."
-        return ""
-    else
-        return path."/"
-    endif
-endfunction
+" redo
+nnoremap r <C-r>
+" line visual
+nnoremap vv <S-v>
 
 " move searched word to center
 nnoremap n nzz
@@ -117,47 +108,28 @@ endfunction
 
 inoremap <expr><Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 
+NeoBundle 'rust-lang/rust.vim'
+NeoBundle 'racer-rust/vim-racer'
+let g:rustfmt_autosave = 1
+let g:rustfmt_command = '$HOME/.cargo/bin/rustfmt'
+set hidden
+let g:racer_cmd = '$HOME/.cargo/bin/racer'
+let $RUST_SRC_PATH="/usr/local/src/rust-1.7.0/src"
 
-NeoBundle 'Yggdroot/indentLine'
-let g:indentLine_faster = 1
-
-NeoBundle 'Townk/vim-autoclose'
-NeoBundle 'bronson/vim-trailing-whitespace'
-NeoBundle 'tpope/vim-surround'
-NeoBundle 'scrooloose/nerdtree'
-command Dir :NERDTree
 
 NeoBundle 'tomtom/tcomment_vim'
-
-" unite.vim config
-NeoBundle 'Shougo/unite.vim'
-NeoBundle 'Shougo/neomru.vim'
-" unite prefix
-nnoremap [unite] <Nop>
-nmap <Space>u [unite]
-let g:unite_enable_start_insert=1
-let g:unite_source_file_mru_limit=50
-let g:unite_source_file_mru_filename_format=''
-" open menu
-nnoremap <silent> [unite]cd :<C-u>Unite<Space>file<CR>
-nnoremap <silent> [unite]b  :<C-u>Unite<Space>buffer<CR>
-nnoremap <silent> [unite]r  :<C-u>Unite<Space>file_mru<CR>
-nnoremap <silent> [unite]f  :<C-u>Unite<Space>bookmark<CR>
-nnoremap <silent> [unite]a  :<C-u>UniteBookmarkAdd<CR>
-autocmd FileType unite call s:unite_setting()
-function! s:unite_setting()"{{{
-    nmap <buffer><Esc> <Plug>(unite_exit)
-    nnoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
-    nnoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
-    nnoremap <silent> <buffer> <expr> <Space><Space><Space> unite#do_action('open')
-    inoremap <silent> <buffer> <expr> <Space> unite#do_action('vsplit')
-    inoremap <silent> <buffer> <expr> <Space><Space> unite#do_action('split')
-    inoremap <silent> <buffer> <expr> <Space><Space><Space> unite#do_action('open')
-endfunction"}}}
 
 NeoBundleLazy 'tpope/vim-endwise',{
         \ 'autoload' : { 'insert' : 1,}}
 
+NeoBundle 'Townk/vim-autoclose'
+NeoBundle 'Yggdroot/indentLine'
+let g:indentLine_faster = 1
+
+NeoBundle 'bronson/vim-trailing-whitespace'
+NeoBundle 'tpope/vim-surround'
+NeoBundle 'scrooloose/nerdtree'
+command Dir :NERDTree
 
 " status line
 set laststatus=2
@@ -206,9 +178,6 @@ function! LightLineFugtive()
 endfunction
 
 " colorschemes
-NeoBundle 'vim-scripts/rdark'
-NeoBundle 'w0ng/vim-hybrid'
-NeoBundle 'sjl/badwolf'
 NeoBundle 'tomasr/molokai'
 
 call neobundle#end()
