@@ -75,6 +75,11 @@ nnoremap r <C-r>
 " line visual
 nnoremap vv <S-v>
 
+nnoremap <Space>h ^
+nnoremap <Space>l $
+nnoremap <Space>/ *
+nnoremap <Space>m %
+
 " move searched word to center
 nnoremap n nzz
 nnoremap N Nzz
@@ -130,6 +135,15 @@ NeoBundle 'bronson/vim-trailing-whitespace'
 NeoBundle 'tpope/vim-surround'
 NeoBundle 'scrooloose/nerdtree'
 command Dir :NERDTree
+
+" for twitter
+NeoBundle 'TwitVim'
+let twitvim_force_ssl = 1
+let twitvim_count = 40
+command Twtl :FriendsTwitter
+command Twref :RefreshTwitter
+nnoremap tj :NextTwitter <CR>
+nnoremap tk :PreviousTwitter <CR>
 
 " status line
 set laststatus=2
