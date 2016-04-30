@@ -193,6 +193,10 @@ endfunction
 
 " colorschemes
 NeoBundle 'tomasr/molokai'
+NeoBundle 'sjl/badwolf'
+NeoBundle 'sheerun/vim-wombat-scheme'
+NeoBundle 'Vim-scripts/Zenburn'
+NeoBundle 'rhysd/wallaby.vim'
 
 call neobundle#end()
 
@@ -202,7 +206,7 @@ NeoBundleCheck
 
 syntax on
 set t_Co=256
-colorscheme molokai
+colorscheme wallaby
 highlight Normal ctermbg=none
 
 if has("autocmd")
