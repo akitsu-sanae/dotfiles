@@ -1,0 +1,18 @@
+[user]
+	email = akitsu.sanae@gmail.com
+    name = akitsu-sanae
+[core]
+    editor = vim
+[color]
+    ui = true
+[github]
+    user = akitsu-sanae
+[alias]
+    branches = branch -a
+    tags = tag
+    discard = checkout
+    uncommit = reset --mixed HEAD~
+    graph = log --graph
+    log-added = log --stat --diff-filter=A
+    log-deleted = log --stat --diff-filter=D
+
