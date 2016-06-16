@@ -8,11 +8,19 @@
 [github]
     user = akitsu-sanae
 [alias]
+    amend = commit --amend
     branches = branch -a
     tags = tag
     discard = checkout
+    unstage = reset -q HEAD
     uncommit = reset --mixed HEAD~
     graph = log --graph
     log-added = log --stat --diff-filter=A
     log-deleted = log --stat --diff-filter=D
+    hitsory = reflog
+    modified-files = ls-files -m
+    unmerged-files = ls-files -u
+    ignored-files = ls-files -v
+    whatch = log --follow
+
 
