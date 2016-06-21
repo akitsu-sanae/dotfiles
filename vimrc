@@ -121,6 +121,12 @@ set hidden
 let g:racer_cmd = '$HOME/.cargo/bin/racer'
 let $RUST_SRC_PATH="/usr/local/src/rust-1.7.0/src"
 
+NeoBundle "jvoorhis/coq.vim"
+NeoBundleLazy "vim-scripts/CoqIDE", {
+    \ 'autoload' : {
+    \     'filetypes' : 'coq'
+    \ }}
+let g:CoqIDE_coqtop = "/c/Coq/bin/coqtop"
 
 NeoBundle 'tomtom/tcomment_vim'
 
