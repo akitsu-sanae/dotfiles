@@ -12,6 +12,7 @@
     branches = branch -a
     tags = tag
     discard = checkout
+    stage = add
     unstage = reset -q HEAD
     uncommit = reset --mixed HEAD~
     graph = log --graph
