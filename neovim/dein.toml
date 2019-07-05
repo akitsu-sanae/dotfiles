@@ -1,0 +1,147 @@
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'tomtom/tcomment_vim'
+
+[[plugins]]
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+repo = 'Townk/vim-autoclose'
+
+[[plugins]]
+repo = 'bronson/vim-trailing-whitespace'
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+hook_add = '''
+command Dir :NERDTree
+'''
+
+[[plugins]]
+repo = 'jdonaldson/vaxe'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = 'context_filetype.vim'
+hook_add = '''
+let g:deoplete#enable_at_startup = 1
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+depends = 'context_filetype.vim'
+hook_add = '''
+let g:neosnippet#snippets_directory = '~/.config/nvim/snippets'
+let g:neosnippet#enable_snipmate_compatibility = 1
+
+imap <C-k> <Plug>(neosnippet_expand_or_jump)
+smap <C-k> <Plug>(neosnippet_expand_or_jump)
+xmap <C-k> <Plug>(neosnippet_expand_target)
+if has('conceal')
+    set conceallevel=2 concealcursor=niv
+endif
+'''
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+depends = 'deoplete.nvim'
+rev = 'next'
+on_ft = ['rust']
+build = 'bash install.sh'
+hook_add = '''
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'rust' : ['rustup', 'run', 'nightly', 'rls'],
+    \ }
+
+augroup LanguageClient_config
+    autocmd!
+    autocmd User LanguageClientStarted setlocal signcolumn=yes
+    autocmd User LanguageClientStopped setlocal signcolumn=auto
+augroup END
+
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> doc :call LanguageClient_textDocument_hover()<CR>
+nnoremap <silent> def :call LanguageClient_textDocument_definition()<CR>
+nnoremap <silent> rename :call LanguageClient_textDocument_rename()<CR>
+'''
+
+[[plugins]]
+repo = 'rust-lang/rust.vim'
+on_ft = 'rust'
+hook_add = '''
+let g:rustfmt_autosave = 1
+'''
+
+[[plugins]]
+repo = 'Yggdroot/indentLine'
+
+
+[[plugins]]
+repo = 'itchyny/lightline.vim'
+hook_add = '''
+set laststatus=2
+
+let g:lightline = {
+    \ 'colorscheme' : 'molokai',
+    \ 'active' : {
+    \    'left' : [ ['mode', 'paste'],
+    \        ['fugitive', 'readonly', 'filename', 'modified']
+    \    ]
+    \ },
+    \ 'component_function' : {
+    \    'fugitive' : 'LightLineFugtive',
+    \    'readonly' : 'LightLineReadonly',
+    \    'modified' : 'LightLineModified'
+    \ },
+    \ 'separator' : { 'left' : '', 'right' : '' },
+    \ 'subseparator' : { 'left' : '|', 'right' : '|' }
+    \ }
+
+function! LightLineModified()
+    if &filetype == "help"
+        return ""
+    elseif &modified
+        return "+"
+    elseif &modifiable
+        return ""
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineReadonly()
+    if &filetype == "help"
+        return ""
+    elseif &readonly
+        return "✖"
+    else
+        return ""
+    endif
+endfunction
+
+function! LightLineFugtive()
+    return exists('*fugitive#head')? fugitive#head() : ''
+endfunction
+'''
+
+[[plugins]]
+repo = 'rhysd/wallaby.vim'
+
+[[plugins]]
+repo = 'tomasr/molokai'
+
+[[plugins]]
+repo = 'jacoborus/tender.vim'
+hook_add = '''
+colorscheme tender
+'''
+
+
